@@ -50,7 +50,7 @@ module.exports = {
 
     return {
       mode: url[0],
-      branch: url[1],
+      branch: decodeURIComponent(url[1]),
       path: (url.slice(2) || []).join('/')
     };
   },
