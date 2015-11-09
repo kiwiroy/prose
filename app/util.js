@@ -58,7 +58,7 @@ module.exports = {
   // Escape the branch for inclusion in URL
   // -------
   escapeBranch: function(raw_branch) {
-    return raw_branch.replace('/', '___');
+    return encodeURIComponent(raw_branch.replace('/', '___'));
   },
 
   // Determine mode for CodeMirror
