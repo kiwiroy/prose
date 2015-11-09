@@ -32,7 +32,7 @@ module.exports = Backbone.View.extend({
     var binary = util.isBinary(file.filename);
 
     var data = {
-      branch: this.branch,
+      branch: util.escapeBranch(this.branch),
       file: file,
       mode: binary ? 'tree' : 'edit',
       path: binary ?

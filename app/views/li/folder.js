@@ -2,6 +2,7 @@ var $ = require('jquery-browserify');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var templates = require('../../../dist/templates');
+var util = require('../../util');
 
 module.exports = Backbone.View.extend({
   tagName: 'li',
@@ -17,13 +18,13 @@ module.exports = Backbone.View.extend({
 
     this.$el.attr('data-index', options.index);
     this.$el.attr('data-navigate', '#' + this.repo.get('owner').login + '/' +
-      this.repo.get('name') + '/tree/' + this.branch + '/' +
+      this.repo.get('name') + '/tree/' + util.escapeBranch(this.branch) + '/' +
       this.model.get('path'));
   },
 
   render: function() {
     var data = _.extend(this.model.attributes, {
-      branch: this.branch,
+      branch: util.escapeBranch(this.branch),
       repo: this.repo.attributes
     });
 

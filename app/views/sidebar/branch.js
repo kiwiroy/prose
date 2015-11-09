@@ -1,5 +1,6 @@
 var $ = require('jquery-browserify');
 var _ = require('underscore');
+var util = require('../../util');
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
@@ -12,7 +13,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.val('#' + [ this.repo.get('owner').login, this.repo.get('name'), 'tree', encodeURIComponent(this.model.get('name')) ].join('/'));
+    this.$el.val('#' + [ this.repo.get('owner').login, this.repo.get('name'), 'tree', encodeURIComponent(util.escapeBranch(this.model.get('name'))) ].join('/'));
     this.el.selected = this.branch && this.branch === this.model.get('name');
 
     this.$el.html(_.escape(this.model.get('name')));

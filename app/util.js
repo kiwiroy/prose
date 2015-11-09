@@ -50,9 +50,15 @@ module.exports = {
 
     return {
       mode: url[0],
-      branch: decodeURIComponent(url[1]),
+      branch: url[1].replace('___', '/'),
       path: (url.slice(2) || []).join('/')
     };
+  },
+
+  // Escape the branch for inclusion in URL
+  // -------
+  escapeBranch: function(raw_branch) {
+    return raw_branch.replace('/', '___');
   },
 
   // Determine mode for CodeMirror
