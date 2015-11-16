@@ -17,13 +17,13 @@ module.exports = Backbone.View.extend({
 
     this.$el.attr('data-index', options.index);
     this.$el.attr('data-navigate', '#' + this.repo.get('owner').login + '/' +
-      this.repo.get('name') + '/tree/' + this.branch + '/' +
+      this.repo.get('name') + '/tree/' + encodeURIComponent(this.branch) + '/' +
       this.model.get('path'));
   },
 
   render: function() {
     var data = _.extend(this.model.attributes, {
-      branch: this.branch,
+      branch: encodeURIComponent(this.branch),
       repo: this.repo.attributes
     });
 

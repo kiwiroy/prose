@@ -118,7 +118,7 @@ module.exports = Backbone.View.extend({
           var previewPath = this.absolutePathFromComponents (
             this.repo.get('owner').login,
             this.repo.get('name'),
-            this.branch,
+            encodeURIComponent(this.branch),
             this.path
           );
           if (this.getStashForPath(previewPath)) {
@@ -163,7 +163,7 @@ module.exports = Backbone.View.extend({
               this.repo.get('owner').login,
               this.repo.get('name'),
               'tree',
-              this.branch,
+              encodeURIComponent(this.branch),
               util.extractFilename(this.path)[0]
             ]).join('/')
           }

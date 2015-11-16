@@ -78,7 +78,7 @@ module.exports = Backbone.View.extend({
       this.repo.get('owner').login,
       this.repo.get('name'),
       'new',
-      this.branch,
+      encodeURIComponent(this.branch),
       this.path ? this.path : this.rooturl
     ]
 
@@ -97,7 +97,7 @@ module.exports = Backbone.View.extend({
       this.repo.get('owner').login,
       this.repo.get('name'),
       'tree',
-      this.branch
+      encodeURIComponent(this.branch)
     ].join('/');
 
     // Set rooturl jail from collection config

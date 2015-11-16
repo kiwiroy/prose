@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
       var view = new BranchView({
         model: branch,
         repo: this.repo,
-        branch: this.branch
+        branch: encodeURIComponent(this.branch)
       });
 
       frag.appendChild(view.render().el);

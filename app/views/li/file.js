@@ -27,14 +27,14 @@ module.exports = Backbone.View.extend({
 
     if (!this.model.get('binary')) {
       this.$el.attr('data-navigate', '#' + this.repo.get('owner').login + '/' +
-        this.repo.get('name') + '/edit/' + this.branch + '/' +
+        this.repo.get('name') + '/edit/' + encodeURIComponent(this.branch) + '/' +
         this.model.get('path'));
     }
   },
 
   render: function() {
     var data = _.extend(this.model.attributes, {
-      branch: this.branch,
+      branch: encodeURIComponent(this.branch),
       repo: this.repo.attributes
     });
 
