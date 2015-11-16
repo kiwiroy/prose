@@ -35,7 +35,7 @@ module.exports = Backbone.Router.extend({
     'chooselanguage(/)': 'chooseLanguage',
     ':user(/)': 'profile',
     ':user/:repo(/)': 'repo',
-    ':user/:repo/*path(/)': 'path',
+    ':user/:repo/:mode(/:branch)(/)*path(/)': 'path',
     '*default': 'start'
   },
 
@@ -198,18 +198,16 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  path: function(login, repoName, path) {
-    var url = util.extractURL(path);
-
-    switch(url.mode) {
+  path: function(login, repoName, mode, branch, path) {
+    switch(mode) {
       case 'tree':
-        this.repo(login, repoName, url.branch, url.path);
+        this.repo(login, repoName, branch, path);
         break;
       case 'new':
       case 'blob':
       case 'edit':
       case 'preview':
-        this.post(login, repoName, url.mode, url.branch, url.path);
+        this.post(login, repoName, mode, branch, path);
         break;
       default:
         throw url.mode;
@@ -307,7 +305,7 @@ module.exports = Backbone.Router.extend({
     }
 
     var file = {
-      branch: branch,
+      branch: encodeURIComponent(branch),
       branches: repo.branches,
       mode: mode,
       nav: this.app.nav,
